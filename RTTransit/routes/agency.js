@@ -14,8 +14,16 @@ router.get('/', function(req, res, next) {
 router.get('/agencies', function(req, res, next) {
     res.contentType('application/json');
     res.setHeader("Access-Control-Allow-Origin", "*");
-    var agencies = Model.getAllAgencies();
-    res.json(agencies);
+    var agencies = Model.getAllAgencies() || [];
+    var result = [];
+    agencies.forEach(function (item) {
+        var agencyObj = Model.getAgency(item);
+        result.push({
+            code: agencyObj.name,
+            name: agencyObj.name
+        })
+    });
+    res.json(result);
 });
 
 router.get('/:agencyName/routes', function (req, res, next) {
