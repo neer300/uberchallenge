@@ -3,10 +3,6 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  /*var controller = req.controller;
-  res.contentType('application/json');
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.json(controller._allStops);*/
     console.log(req.allStops);
     var allStops = req.allStops;
     var agencies = [];
@@ -15,7 +11,7 @@ router.get('/', function(req, res, next) {
             agencies.push(key);
         }
     }
-    res.render('index', { agencies: agencies, all: JSON.stringify(allStops) });
+    res.render('index', { agencies: agencies});
 });
 
 router.get('/agency', function(req, res, next) {

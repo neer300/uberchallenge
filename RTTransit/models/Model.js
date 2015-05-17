@@ -26,13 +26,13 @@ Stop.prototype.update = function (departureList) {
 function Direction (directionName) {
     var self = this;
     self.directionName = directionName;
-    self.stopCodes = {};
+    self.stops = {};
 }
 
-Direction.prototype.addStop = function (stopCode, stop) {
+Direction.prototype.addStop = function (stop) {
     var self = this;
-    if (stopCode && stop) {
-        self.stopCodes[stopCode] = stop;
+    if (stop) {
+        self.stops[stop.stopCode] = stop;
     }
 };
 
@@ -51,10 +51,10 @@ function Route (routeName, code) {
     self.directions = {};
 }
 
-Route.prototype.addDirection = function (directionObj, code) {
+Route.prototype.addDirection = function (directionObj) {
     var self = this;
-    if (code && directionObj) {
-        self.directions[code] = directionObj;
+    if (directionObj) {
+        self.directions[directionObj.directionName] = directionObj;
     }
 };
 
@@ -77,63 +77,97 @@ function Agency (name, hasDirection, mode) {
 Agency.prototype.addRoute = function (routeObj) {
     var self = this;
     if (routeObj && routeObj instanceof Route) {
-        var routeName = routeObj.routeName;
-        self.routes[routeName] = routeObj;
+        var routeCode = routeObj.code;
+        self.routes[routeCode] = routeObj;
     }
 };
 
-Agency.prototype.getRoute = function (routeName) {
+Agency.prototype.getRoute = function (routeCode) {
     var self = this;
-    var routeObj = self.routes[routeName];
+    var routeObj = self.routes[routeCode];
     return routeObj;
 };
 
-var allData = {};
-
-exports.add = function (agency, route, direction, stopCode, departureList) {
-    agency = agency.toLowerCase();
-    route = route.toLowerCase();
-    direction = direction.toLowerCase();
-
-    var agencyObj = allData[agency] || new Agency(agency);
-    allData[agency] = agencyObj;
-
-    var routeObj = agency.getRoute() || new Route(route);
-    agencyObj.addRoute(routeObj);
-
-    var directionObj = routeObj.getDirection(direction) || new Direction(direction);
-    routeObj.addDirection(directionObj);
-
-    var stopObj = directionObj.getStop(stopCode) || new Stop(stopCode, departureList);
-    stopObj.update(departureList);
-    directionObj.addStop(stopObj);
+Agency.prototype.getAllRouteCodes = function () {
+    var self = this;
+    var result = [];
+    for (var key in self.routes) {
+        if (self.routes.hasOwnProperty(key)) {
+            result.push(key);
+        }
+    }
+    return result;
 };
 
-exports.get = function (agency, route, direction, stopCode) {
-    var agencyObj = allData[agency];
+var allData = {}; // No need for DB. Model is populated on every startup or after definite interval.
+
+module.exports.addNewAgency = function addNewAgency (agencyObj) {
+    allData[agencyObj.name] = agencyObj;
+};
+
+module.exports.addNewRouteForAgency = function (agencyName, routeObj) {
+    var agencyObj = allData[agencyName];
     if (agencyObj) {
-        var routeObj = agencyObj.getRoute(route);
+        agencyObj.addRoute(routeObj);
+    }
+};
+
+module.exports.addNewDirectionForRoute = function (agencyName, routeCode, directionObj) {
+    var agencyObj = allData[agencyName];
+    if (agencyObj) {
+        var routeObj = agencyObj.getRoute(routeCode);
         if (routeObj) {
-            var directionObj = routeObj.getDirection(direction);
-            if (directionObj) {
-                return directionObj.getStop(stopCode);
+            routeObj.addDirection(directionObj);
+        }
+    }
+}
+
+module.exports.addNewStopForDirection = function (agencyName, routeCode, directionName, stopObj) {
+    var agencyObj = allData[agencyName];
+    if (agencyObj) {
+        var routeObj = agencyObj.getRoute(routeCode);
+        if (routeObj) {
+            var dirObj = routeObj.getDirection(directionObj);
+            if (dirObj) {
+                dirObj.addStop(stopObj);
             }
         }
     }
 };
 
-exports.update = function (agency, route, direction, stopCode, newDepartureList) {
-    var agencyObj = allData[agency];
+module.exports.updateDeparturesForStop = function (agencyName, routeCode, directionCode, stopCode, departureList) {
+    var agencyObj = allData[agencyName];
     if (agencyObj) {
-        var routeObj = agencyObj.getRoute(route);
+        var routeObj = agencyObj.getRoute(routeCode);
         if (routeObj) {
-            var directionObj = routeObj.getDirection(direction);
-            if (directionObj) {
-                var stopObj = directionObj.getStop(stopCode);
+            var dirObj = routeObj.getDirection(directionObj);
+            if (dirObj) {
+                var stopObj = dirObj.getStop(stopCode);
                 if (stopObj) {
-                    stopObj.update(newDepartureList);
+                    for (var index = 0; index < departureList.length; index++) {
+                        departureList[index] = parseInt(departureList[index]);
+                    }
+                    departureList.sort();
+                    stopObj.update(departureList);
                 }
             }
         }
     }
 };
+
+module.exports.getAllAgencies = function () {
+    var result = [];
+    for (var key in allData) {
+        if (allData.hasOwnProperty(key)) {
+            result.push(key);
+        }
+    }
+    return result;
+};
+
+module.exports.getAgency = function (name) {
+    var agencyObj = allData[name];
+    if (agencyObj) {
+        return agencyObj;
+    }
+}

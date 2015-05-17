@@ -7,6 +7,7 @@ var http = require('http');
 var xmlParser = require('xml2js').parseString;
 var ParserManager = require('./ParserManager');
 var BaseService = require('./BaseService');
+var util = require('util');
 
 util.inherits(RTTService511, BaseService);
 
@@ -47,10 +48,9 @@ RTTService511.prototype.getAgencies = function (cb) {
                     hasDirection: hasDirection,
                     mode: mode
                 });
-                self.foundNewAgency(agencyName, hasDirection, mode);
+                self.foundNewAgency(name, hasDirection, mode);
+                cb(name, hasDirection);
             }
-
-            cb(agencyNames);
         });
     });
 };
@@ -83,6 +83,7 @@ RTTService511.prototype.getRoutes = function (name, hasDirection, cb) {
                             code: routeCode,
                             directionArray: []
                     };
+                    self.foundNewRoute(name, routeCode, routeName);
                     var directionArray = routeObj.directionArray;
                     if (hasDirection) {
                         var routeDirectionList = routeItem.getElementsByTagName('RouteDirection');
@@ -95,12 +96,18 @@ RTTService511.prototype.getRoutes = function (name, hasDirection, cb) {
                                     name: directionName
                             };
                             routeObj.directionArray.push(directionObj);
+                            self.foundNewDirection(name, routeCode, directionCode, directionName);
+                            cb(routeCode, directionCode);
                         }
+                    } else {
+                        self.foundNewDirection(name, routeCode, '', '');
+                        cb(routeCode, '');
                     }
                     routeArray.push(routeObj);
                 }
-                cb(routeArray, name);
+                //cb(routeArray, name);
             } catch (ex) {
+                console.log(ex);
                 console.log('exception happened');
                 cb(null);
             }
@@ -136,8 +143,10 @@ RTTService511.prototype.getStops = function (agencyName, routeCode, directionCod
                         name: stopName,
                         code: stopCode
                     });
+                    self.foundNewStop(agencyName, routeCode, directionCode, stopCode, stopName);
+                    cb(stopCode);
                 }
-                cb(stops);
+                //cb(stops);
             } catch (err) {
                 //cb(null);
             }
@@ -145,7 +154,7 @@ RTTService511.prototype.getStops = function (agencyName, routeCode, directionCod
     });
 };
 
-RTTService511.prototype.getDepartures = function (routeCode, stopCode, cb) {
+RTTService511.prototype.getDepartures = function (stopCode, cb) {
     var self = this;
     var method = 'GetNextDeparturesByStopCode.aspx';
     var url = self.createUrl(method);
@@ -162,18 +171,23 @@ RTTService511.prototype.getDepartures = function (routeCode, stopCode, cb) {
             try {
                 var xmlDom = ParserManager.parseXml(datachunk);
                 var agencyList = xmlDom.getElementsByTagName('Agency');
-                var localDeparture = [];
+
                 for (var i = 0; i < agencyList.length; i++) {
-                    var routeList = agencyList[i].getElementsByTagName('Route');
+                    var agencyItem = agencyList[i];
+                    var agencyName = agencyItem.getAttribute('Name');
+                    var routeList = agencyItem.getElementsByTagName('Route');
+                    
                     for (var j = 0; j < routeList.length; j++) {
+                        var localDeparture = [];
                         var routeItem = routeList[j];
+                        var routeDirection = routeItem.getElementsByTagName('RouteDirection');
+                        var directionCode = routeDirection.getAttribute('Code');
                         var departures = routeItem.getElementsByTagName('DepartureTime');
-                        var code = routeItem.getAttribute('Code');
-                        if (routeCode === code) {
-                            for (var k = 0; k < departures.length; k++) {
-                                localDeparture.push(departures[k].textContent);
-                            }
+                        var routeCode = routeItem.getAttribute('Code');
+                        for (var k = 0; k < departures.length; k++) {
+                            localDeparture.push(departures[k].textContent);
                         }
+                        self.foundNewDepartures(agencyName, routeCode, directionCode, stopCode, localDeparture);
                     }
                 }
                 cb(localDeparture);

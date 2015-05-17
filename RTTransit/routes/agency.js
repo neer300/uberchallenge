@@ -1,32 +1,25 @@
 var express = require('express');
+var Model = require('../models/Model');
 var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    var allStops = req.allStops;
     res.contentType('application/json');
     res.setHeader("Access-Control-Allow-Origin", "*");
-    var allStops = req.allStops;
-    var agencies = [];
-    for (var key in allStops) {
-        if (allStops.hasOwnProperty(key)) {
-            agencies.push(key);
-        }
-    }
+    var agencies = Model.getAllAgencies();
     res.json(agencies);
 });
 
-router.get('/:agencyName', function (req, res, next) {
-    var allStops = req.allStops;
-    
+router.get('/:agencyName/routes', function (req, res, next) {
     var agencyName = req.params.agencyName;
-    var agencyObj = allStops[agencyName] || {};
-    var routeArray = agencyObj.routeArray || [];
+    var agencyObj = Model.getAgency(agencyName);
+    var routeArray = agencyObj.getAllRouteCodes();
     var result = [];
     routeArray.forEach(function(item) {
+        var routeObj = agencyObj.getRoute(item);
         result.push({
-            name: item.name,
-            code: item.code
+            name: routeObj.routeName,
+            code: routeObj.code
         });
     });
     res.contentType('application/json');
@@ -34,7 +27,7 @@ router.get('/:agencyName', function (req, res, next) {
     res.json(result);
 });
 
-router.get('/:agencyName/:routeCode', function (req, res, next) {
+router.get('/:agencyName/:routeCode/directions', function (req, res, next) {
     var allStops = req.allStops;
     
     var agencyName = req.params.agencyName;

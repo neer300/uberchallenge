@@ -24,10 +24,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var Controller = require('./controllers/controller');
+var Model = require('./models/Model');
 var allStops = {};
 
 app.use(function (req, res, next) {
-    req.allStops = allStops;
+    req.model = Model;
     next();
 });
 
@@ -67,11 +68,12 @@ app.use(function(err, req, res, next) {
 });
 
 
-
-module.exports = {
+var RTTService = require('./controllers/RTTService511');
+var service = new RTTService();
+service.fetchAll();
+/*module.exports = {
    start: function (portNumber, cb) {
-       var RTTService = require('./controllers/RTTService511');
-       var service = new RTTService();
+       
        service.getAgencies(function (agencies) {
            if (agencies) {
                for (var index = 0; index < agencies.length; index++) {
@@ -102,4 +104,6 @@ module.exports = {
        });
    },
    app: app
-};
+};*/
+
+module.exports = app;
