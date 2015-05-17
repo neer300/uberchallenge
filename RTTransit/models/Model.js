@@ -10,11 +10,11 @@ module.exports = {
 
 var allStops = {};
 
-function Stop (stopCode, departureList) {
+function Stop (stopCode, stopName) {
     var self = this;
     self.stopCode = stopCode;
-    self.departureList = departureList;
-    self.lastUpdated = new Date().getTime();
+    self.stopName = stopName;
+    self.lastUpdated = 0;
 }
 
 Stop.prototype.update = function (departureList) {
@@ -23,9 +23,10 @@ Stop.prototype.update = function (departureList) {
     self.lastUpdated = new Date().getTime();
 };
 
-function Direction (directionName) {
+function Direction (directionCode, directionName) {
     var self = this;
     self.directionName = directionName;
+    self.directionCode = directionCode;
     self.stops = {};
 }
 
@@ -39,12 +40,23 @@ Direction.prototype.addStop = function (stop) {
 Direction.prototype.getStop = function (stopCode) {
     var self = this;
     if (stopCode) {
-        return self.stopCodes[stopCode];
+        return self.stops[stopCode];
     }
     return null;
 };
 
-function Route (routeName, code) {
+Direction.prototype.getAllStops = function () {
+    var self = this;
+    var result = [];
+    for (var key in self.stops) {
+        if (self.stops.hasOwnProperty(key)) {
+            result.push(key);
+        }
+    }
+    return result;
+}
+
+function Route (code, routeName) {
     var self = this;
     self.routeName = routeName;
     self.code = code;
@@ -54,7 +66,7 @@ function Route (routeName, code) {
 Route.prototype.addDirection = function (directionObj) {
     var self = this;
     if (directionObj) {
-        self.directions[directionObj.directionName] = directionObj;
+        self.directions[directionObj.directionCode] = directionObj;
     }
 };
 
@@ -64,6 +76,17 @@ Route.prototype.getDirection = function (code) {
         return self.directions[code];
     }
     return null;
+};
+
+Route.prototype.getAllDirections = function () {
+    var self = this;
+    var result = [];
+    for (var key in self.directions) {
+        if (self.directions.hasOwnProperty(key)) {
+            result.push(key);
+        }
+    }
+    return result;
 };
 
 function Agency (name, hasDirection, mode) {
@@ -122,12 +145,12 @@ module.exports.addNewDirectionForRoute = function (agencyName, routeCode, direct
     }
 }
 
-module.exports.addNewStopForDirection = function (agencyName, routeCode, directionName, stopObj) {
+module.exports.addNewStopForDirection = function (agencyName, routeCode, directionCode, stopObj) {
     var agencyObj = allData[agencyName];
     if (agencyObj) {
         var routeObj = agencyObj.getRoute(routeCode);
         if (routeObj) {
-            var dirObj = routeObj.getDirection(directionObj);
+            var dirObj = routeObj.getDirection(directionCode);
             if (dirObj) {
                 dirObj.addStop(stopObj);
             }
@@ -140,7 +163,7 @@ module.exports.updateDeparturesForStop = function (agencyName, routeCode, direct
     if (agencyObj) {
         var routeObj = agencyObj.getRoute(routeCode);
         if (routeObj) {
-            var dirObj = routeObj.getDirection(directionObj);
+            var dirObj = routeObj.getDirection(directionCode);
             if (dirObj) {
                 var stopObj = dirObj.getStop(stopCode);
                 if (stopObj) {

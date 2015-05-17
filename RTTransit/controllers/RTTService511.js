@@ -4,7 +4,6 @@
 module.exports = RTTService511;
 
 var http = require('http');
-var xmlParser = require('xml2js').parseString;
 var ParserManager = require('./ParserManager');
 var BaseService = require('./BaseService');
 var util = require('util');
@@ -13,7 +12,7 @@ util.inherits(RTTService511, BaseService);
 
 function RTTService511 () {
     var self = this;
-    BaseService.call();
+    BaseService.call(); // Super constructor
     self._token = '8e4100f1-cddc-4a1d-8391-c0f28003ecac';
     self._serviceUrl = 'http://services.my511.org/Transit2.0/';
 }
@@ -49,7 +48,7 @@ RTTService511.prototype.getAgencies = function (cb) {
                     mode: mode
                 });
                 self.foundNewAgency(name, hasDirection, mode);
-                cb(name, hasDirection);
+                cb(name, hasDirection, mode);
             }
         });
     });
@@ -100,8 +99,8 @@ RTTService511.prototype.getRoutes = function (name, hasDirection, cb) {
                             cb(routeCode, directionCode);
                         }
                     } else {
-                        self.foundNewDirection(name, routeCode, '', '');
-                        cb(routeCode, '');
+                        self.foundNewDirection(name, routeCode, 'default', 'default');
+                        cb(routeCode, 'default');
                     }
                     routeArray.push(routeObj);
                 }
@@ -146,9 +145,8 @@ RTTService511.prototype.getStops = function (agencyName, routeCode, directionCod
                     self.foundNewStop(agencyName, routeCode, directionCode, stopCode, stopName);
                     cb(stopCode);
                 }
-                //cb(stops);
             } catch (err) {
-                //cb(null);
+                cb(null);
             }
         });
     });
@@ -176,22 +174,27 @@ RTTService511.prototype.getDepartures = function (stopCode, cb) {
                     var agencyItem = agencyList[i];
                     var agencyName = agencyItem.getAttribute('Name');
                     var routeList = agencyItem.getElementsByTagName('Route');
-                    
                     for (var j = 0; j < routeList.length; j++) {
                         var localDeparture = [];
                         var routeItem = routeList[j];
                         var routeDirection = routeItem.getElementsByTagName('RouteDirection');
-                        var directionCode = routeDirection.getAttribute('Code');
+                        var directionCode = 'default';
+                        if (routeDirection && routeDirection.length > 0) {
+                            directionCode = routeDirection[0].getAttribute('Code');
+                        }
+
                         var departures = routeItem.getElementsByTagName('DepartureTime');
                         var routeCode = routeItem.getAttribute('Code');
                         for (var k = 0; k < departures.length; k++) {
                             localDeparture.push(departures[k].textContent);
                         }
                         self.foundNewDepartures(agencyName, routeCode, directionCode, stopCode, localDeparture);
+                        cb(localDeparture, routeCode);
                     }
                 }
-                cb(localDeparture);
+
             } catch (ex) {
+                console.log(ex);
                 cb(null);
             }
         });

@@ -25,7 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var Controller = require('./controllers/controller');
 var Model = require('./models/Model');
-var allStops = {};
 
 app.use(function (req, res, next) {
     req.model = Model;
@@ -33,7 +32,6 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', agency);
-app.use('/agency', agency);
 
 
 // catch 404 and forward to error handler
@@ -69,41 +67,7 @@ app.use(function(err, req, res, next) {
 
 
 var RTTService = require('./controllers/RTTService511');
-var service = new RTTService();
+var service = new RTTService(); // TODO Introduce a factory
 service.fetchAll();
-/*module.exports = {
-   start: function (portNumber, cb) {
-       
-       service.getAgencies(function (agencies) {
-           if (agencies) {
-               for (var index = 0; index < agencies.length; index++) {
-                   var agencyObj = agencies[index];
-                   var agencyName = agencyObj.name;
-                   var hasDirection = agencyObj.hasDirection;
-                   allStops[agencyName] = agencyObj;
-                   console.log('getting routes for ' + agencyName);
-                   service.getRoutes(agencyName, agencyObj.hasDirection, function (routeArray, name) {
-                       var agencyObj = allStops[name];
-                       agencyObj.routeArray = routeArray;
-                       for (var j = 0; j < routeArray.length; j++) {
-                           var routeItem = routeArray[j];
-                           var directionArray = routeItem.directionArray || [];
-                           routeItem.directionArray = directionArray;
-                           for (var k = 0; k < directionArray.length; k++) {
-                               var directionItem = directionArray[k];
-                               console.log('getting stops for ' + name);
-                               service.getStops(name, routeItem.code, directionItem.code, function (stops) {
-                                   directionItem.stops = stops;
-                               });
-                           }
-                       }
-                   });
-               }
-           }
-           cb();
-       });
-   },
-   app: app
-};*/
 
 module.exports = app;
