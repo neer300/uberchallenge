@@ -4,6 +4,8 @@ block content
   h1= title
   p Welcome to Real Time Transit
 
-  select
+  select#agencySelect
      each agency, i in agencies
-       option(value = i) #{agency}
+       option(value = agency) #{agency}
+       
+  div(id="agencyListDiv")

@@ -4,6 +4,13 @@ var router = express.Router();
 var RTTService = require('../controllers/RTTService511');
 
 /* GET users listing. */
+router.get('/', function(req, res, next) {
+    var result = [];
+    var agencies = Model.getAllAgencies();
+
+    res.render('index', { agencies: agencies});
+});
+
 router.get('/agencies', function(req, res, next) {
     res.contentType('application/json');
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -105,6 +112,7 @@ router.get('/:agencyName/:routeCode/:directionCode/:stopCode/departures', functi
                                 res.contentType('application/json');
                                 res.setHeader("Access-Control-Allow-Origin", "*");
                                 res.json(result);
+                                return;
                             }
                         });
                     } else {
