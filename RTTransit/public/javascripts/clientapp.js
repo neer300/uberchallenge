@@ -1,135 +1,179 @@
 
 (function ($) {
     
-    var selectTemplate = '<select><% _(itemList).each(function(item) { %><option value="<%= item.get(\'code\') %>"><%= item.get(\'name\') %></option><% }); %></select>';
+    var selectTemplate = '<select><option disabled selected> -- select an option -- </option><% _(itemList).each(function(item) { %><option value="<%= item.get(\'code\') %>"><%= item.get(\'name\') %></option><% }); %></select>';
+    var listTemplate = '<ul style="list-style-type:none"><% _(itemList).each(function(item) { %><li><%= item %></li><% }); %></ul>';
     
     var BaseItem = Backbone.Model.extend({
+        idAttribute: 'code',
         code: null,
         name: null
     });
     
     var ItemCollection = Backbone.Collection.extend({
-        model: BaseItem
+        model: BaseItem,
+        gather: function () {
+            this.fetch({
+                success: function (collection) {
+                    var models = collection.models;
+                    models.forEach(function (item) {
+                        console.log('code:' + item.get('code') + ' name:' + item.get('name'));
+                    });
+                },
+                error: function () {
+                    console.err('Agencies fetch failed');
+                }
+            });
+          }
     });
     
     var AgencyCollection = ItemCollection.extend({
         url: '/agencies',
+    });
+    
+    var RouteItem = BaseItem.extend({
+        directionArray: null
+    });
+    
+    var RouteCollection = ItemCollection.extend({
+        initialize: function (a, b) {
+            console.log(a);
+            console.log(b);
+            this.url = '/'  + agencyCode + '/routes';
+        },
+        model: RouteItem
+    });
+    
+    var StopCollection = ItemCollection.extend({
         initialize: function () {
+            this.url = '/'  + agencyCode + '/' + routeCode + '/' + directionCode + '/stops';
+        }
+    });
+    
+    var DepartureCollection = Backbone.Collection.extend({
+        initialize: function () {
+            this.url = '/'  + agencyCode + '/' + routeCode + '/' + directionCode + '/' + stopCode + '/departures';
         },
         gather: function () {
-          this.fetch({
-              success: function (collection) {
-                  console.log('Agencies fetched');
-                  console.log(collection.models);
-                  var itemList = collection.models;
-                  itemList.forEach(function (item) {
-                      console.log('code:' + item.get('code') + ' name: ' + item.get('name'));
-                  });
-              },
-              error: function () {
-                  console.err('Agencies fetch failed');
-              }
-          });
+            this.fetch({
+                success: function (collection) {
+                    var models = collection.models;
+                    models.forEach(function (item) {
+                        console.log(item);
+                    });
+                },
+                error: function () {
+                    console.err('Agencies fetch failed');
+                }
+            });
+        },
+        parse: function(response) {
+            console.log(response);
+            this.models = response;
+        }
+    });
+    
+    var SelectView = Backbone.View.extend({
+        initialize: function () {
+            _.bindAll(this, 'render', 'onLocalChangeEvent');
+            this.collection.on('sync', this.render);
+        },
+        events: {
+            'change': 'onLocalChangeEvent'
+        },
+        render: function () {
+            //console.log($('#listTemplate').html());
+            var modelList = this.collection.models;
+            var template = _.template(selectTemplate, {
+                itemList: modelList
+            });
+
+            this.$el.html(template);
+            return this;
+        },
+        onLocalChangeEvent: function (e) {
+            this.trigger('itemselected', e.target.value);
         }
     });
     
     var ListView = Backbone.View.extend({
-        el: '#agencyListDiv',
         initialize: function () {
-//            this.itemCollection = new ItemCollection(BaseItem, {
-//                view: this
-//            });
-//
-//            this.itemCollection.add(new BaseItem({
-//                code: 'BART',
-//                name: 'BART'
-//            }));
-//
-//            this.itemCollection.add(new BaseItem({
-//                code: 'VTA',
-//                name: 'VTA'
-//            }));
-//            this.render();
             _.bindAll(this, 'render');
             this.collection.on('sync', this.render);
         },
         render: function () {
-            //console.log($('#listTemplate').html());
-            var modelList = this.collection.models; 
-            console.log(modelList);
-            var template = _.template(selectTemplate, {
+            var modelList = this.collection.models;
+            var template = _.template(listTemplate, {
                 itemList: modelList
             });
-            console.log(template);
-            $("#agencyListDiv").html(template);
+
+            this.$el.html(template);
+            return this;
         }
     });
-    var newItem = new BaseItem({
-        code: 'BART',
-        name: 'BART'
-    });
+    
+    var newRouteCollection;
+    var agencyCollection;
+    var directionCollection;
+    var agencyCode = '';
+    var routeCode = '';
+    var directionCode = '';
+    var stopCode = '';
+    
+    function onStopSelect(value) {
+        stopCode = value;
+        var newDepartureCollection = new DepartureCollection();
+        var newDeparturesView = new ListView({
+            collection: newDepartureCollection
+        });
+        newDepartureCollection.gather();
+        $("#departuresListDiv").empty().append(newDeparturesView.render().$el);
+    } 
+    
+    function onDirectionSelect(value) {
+        directionCode = value;
+        var newStopCollection = new StopCollection();
+        var newStopView = new SelectView({
+            collection: newStopCollection
+        });
+        newStopView.on('itemselected', onStopSelect);
+        newStopCollection.gather();
+        $("#stopListDiv").empty().append(newStopView.render().$el);
+        $("#departuresListDiv").empty();
+    }
+    function onRouteSelect(value) {
+        routeCode = value;
+        var routeModel = newRouteCollection.get(value);
+        var directionArray = routeModel.get('directionArray');
+        directionCollection = new ItemCollection(directionArray, {refId: value });
+        var directionView = new SelectView({
+            collection: directionCollection
+        });
+        directionView.on('itemselected', onDirectionSelect);
+        $("#directionListDiv").empty().append(directionView.render().$el);
+        $("#departuresListDiv").empty();
+        $("#stopListDiv").empty();
+    }
+    
+    function onAgencySelect(value) {
+        agencyCode = value;
+        newRouteCollection = new RouteCollection([],{refId: value});
+        var newRouteView = new SelectView({
+            collection: newRouteCollection
+        });
+        newRouteView.on('itemselected', onRouteSelect);
+        newRouteCollection.gather();
+        $("#routeListDiv").empty().append(newRouteView.render().$el);
+        $("#departuresListDiv").empty();
+        $("#stopListDiv").empty();
+        $("#directionListDiv").empty()
+    }
 
-    var agencyCollection = new AgencyCollection();
-    var newListView = new ListView({collection: agencyCollection});
+    agencyCollection = new AgencyCollection();
+    var newListView = new SelectView({
+        collection: agencyCollection
+    });
+    newListView.on('itemselected', onAgencySelect);
     agencyCollection.gather();
-    
-    /*var selectTemplate = '<select id="rate-selector"><% rates.each(function(rate) { %><option value="<%= rate.get(\'duration\') %>"><%= rate.get(\'duration\') %></option><% }); %></select>';
-    console.log('underscore:' + (_ !== null));
-    Rate = Backbone.Model.extend({
-        duration: null
-    });
-
-    Rates = Backbone.Collection.extend({
-        initialize: function(model, options) {}
-    });
-
-    AppView = Backbone.View.extend({
-        el: 'div',
-        initialize: function() {
-            _.bindAll(this, 'render'); 
-            this.rates = new Rates(null, {
-                view: this
-            });
-
-            this.rates.add(new Rate({
-                duration: "Not Set"
-            }));
-            this.rates.add(new Rate({
-                duration: "Weekly"
-            }));
-            this.rates.add(new Rate({
-                duration: "Monthly"
-            }));
-
-            this.render();
-        },
-        render: function() {
-            console.log('rendering now');
-            /*var rate_select_template = _.template(selectTemplate, {
-                rates: this.rates,
-                labelValue: 'Something'
-            });
-            var html = rate_select_template.toString();
-            globalNeeraj = rate_select_template;
-            console.log(html);
-            console.log("hello world");
-            console.log(rate_select_template);
-            console.log('setting html:' + globalNeeraj);
-            var element = $("#rate-editor-container");
-            var div = document.getElementById('rate-editor-container');
-            console.log(div);
-            console.log('inner:' + element.innerHTML);
-            var actual = '<select id="rate-selector"><option value="Not Set">Not Set</option><option value="Weekly">Weekly</option><option value="Monthly">Monthly</option></select>';
-            $("#rate-editor-container").html(actual);
-            element.innerHTML = globalNeeraj;
-          //  this.delegateEvents();
-          //  $("#rate-editor-container").empty().append("<button id='add'>Add list item</button>");
-            $(this.el).html("<button id='add'>Add list item</button>");
-            console.log('append done');
-        },
-    });
-
-    var appview = new AppView();*/
-    //$("#rate-editor-container").append("<button id='add'>Add list item</button>");
-    
+    $("#agencyListDiv").empty().append(newListView.render().$el);
 })(jQuery);

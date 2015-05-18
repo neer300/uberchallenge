@@ -103,6 +103,8 @@ router.get('/:agencyName/:routeCode/:directionCode/:stopCode/departures', functi
     var directionCode = req.params.directionCode;
     var stopCode = req.params.stopCode;
     var agencyObj = Model.getAgency(agencyName);
+    res.contentType('application/json');
+    res.setHeader("Access-Control-Allow-Origin", "*");
     var result = {};
     if (agencyObj) {
         var routeObj = agencyObj.getRoute(routeCode);
@@ -117,38 +119,37 @@ router.get('/:agencyName/:routeCode/:directionCode/:stopCode/departures', functi
                         service.getDepartures(stopCode, function (departList, currentRouteCode) {
                             if (currentRouteCode === routeCode) {
                                 result = stopObj.departureList;
-                                res.contentType('application/json');
-                                res.setHeader("Access-Control-Allow-Origin", "*");
                                 res.json(result);
-                                return;
                             }
                         });
                     } else {
                         result = stopObj.departureList;
+                        res.json(result);
                     }
                 } else {
                     result = {
                             err: "No such stop code exists"
                     };
+                    res.json(result);
                 }
             } else {
                 result = {
                         err: "No such direction code exists"
                 };
+                res.json(result);
             }
         } else {
             result = {
                     err: "No such route code exists"
             };
+            res.json(result);
         }
     } else {
         result = {
                 err: "No such agent name exists"
         };
+        res.json(result);
     }
-    res.contentType('application/json');
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.json(result);
 });
 
 module.exports = router;
