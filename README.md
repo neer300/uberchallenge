@@ -41,3 +41,7 @@
   * LinkedIn - https://www.linkedin.com/in/neerajsjoshi
 
 ###Hosted here - http://secure-depths-2215.herokuapp.com/
+
+####Steps
+  * Run - npm start
+  * Unit Test - npm test
