@@ -1,6 +1,29 @@
 
 (function ($) {
     
+    function success (position) {
+        console.log(position);
+        var coords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        var options = {
+            zoom: 15,
+            center: coords,
+            mapTypeControl: false,
+            navigationControlOptions: {
+                style: google.maps.NavigationControlStyle.SMALL
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var element = $("#mapContainer");
+        element.css('width', '300px');
+        element.css('height', '200px');
+        var map = new google.maps.Map(document.getElementById('mapContainer'), options);
+        var marker = new google.maps.Marker({
+            position: coords,
+            map: map,
+            title: "You are here"
+        });
+    }
+    
     var selectTemplate = '<select><option disabled selected> -- select an option -- </option><% _(itemList).each(function(item) { %><option value="<%= item.get(\'code\') %>"><%= item.get(\'name\') %></option><% }); %></select>';
     var listTemplate = '<ul style="list-style-type:none"><% _(itemList).each(function(item) { %><li><%= item %></li><% }); %></ul>';
     
@@ -135,7 +158,7 @@
         var newDeparturesView = new ListView({
             collection: newDepartureCollection,
             defaultMsg: 'No departures available at this time',
-            title: 'Departures'
+            title: 'Departures in next (minutes)'
         });
         newDepartureCollection.gather();
         $("#departuresListDiv").empty().append(newDeparturesView.render().$el);
@@ -191,4 +214,10 @@
     newListView.on('itemselected', onAgencySelect);
     agencyCollection.gather();
     $("#agencyListDiv").empty().append(newListView.render().$el);
+    
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success);
+    } else {
+        $("#mapContainer").html('<p>Map cannot be displayed as no geolocation is available</p>');
+    }
 })(jQuery);
