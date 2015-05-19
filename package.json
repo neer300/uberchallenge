@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./RTTService/bin/www"
+    "start": "node ./RTTransit/bin/www"
   },
   "dependencies": {
     "body-parser": "~1.12.0",

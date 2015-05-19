@@ -1,1 +1,1 @@
-web: cd RTTService && node ./bin/www
+web: node ./RTTransit/bin/www
