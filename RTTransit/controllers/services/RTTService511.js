@@ -4,7 +4,7 @@
 module.exports = RTTService511;
 
 var http = require('http');
-var ParserManager = require('./ParserManager');
+var ParserManager = require('../parser/ParserManager');
 var BaseService = require('./BaseService');
 var util = require('util');
 
@@ -17,15 +17,26 @@ function RTTService511 () {
     self._serviceUrl = 'http://services.my511.org/Transit2.0/';
 }
 
-RTTService511.prototype.createUrl = function (methodName) {
+/**
+ * Creates the necessary url given a method name
+ * @param methodName
+ * @returns {String}
+ */
+RTTService511.prototype._createUrl = function (methodName) {
     var self = this;
     return self._serviceUrl + methodName + '?token=' + self._token;
 };
 
+/**
+ * Routine responsible for getting all the agency information supported by
+ * this service.
+ * @param stopCode
+ * @param cb
+ */
 RTTService511.prototype.getAgencies = function (cb) {
     var self = this;
-    var method = 'GetAgencies.aspx';
-    var url = self.createUrl(method);
+    var method = 'GetAgencies.aspx'; // The API name to get all agency information
+    var url = self._createUrl(method);
     console.log('url:' + url);
     http.get(url, function (res) {
         res.setEncoding('utf8');
@@ -54,10 +65,16 @@ RTTService511.prototype.getAgencies = function (cb) {
     });
 };
 
+/**
+ * Routine responsible for getting all the routes for provided agency
+ * @param agencyName
+ * @param hasDirection
+ * @param cb
+ */
 RTTService511.prototype.getRoutes = function (name, hasDirection, cb) {
     var self = this;
     var method = 'GetRoutesForAgency.aspx';
-    var url = self.createUrl(method);
+    var url = self._createUrl(method);
     url = url + '&agencyName=' + name;
     console.log(url);
     var routeIDFs = [];
@@ -114,10 +131,16 @@ RTTService511.prototype.getRoutes = function (name, hasDirection, cb) {
     });
 };
 
+
+/**
+ * Routine responsible for getting all the stops for provided agency and route.
+ * @param stopCode
+ * @param cb
+ */
 RTTService511.prototype.getStops = function (agencyName, routeCode, directionCode, cb) {
     var self = this;
     var method = 'GetStopsForRoute.aspx';
-    var url = self.createUrl(method);
+    var url = self._createUrl(method);
     directionCode = directionCode || '';
     var routeIDF = agencyName + '~' + routeCode + '~' + directionCode;
     url = url + '&routeIDF=' + routeIDF;
@@ -152,10 +175,16 @@ RTTService511.prototype.getStops = function (agencyName, routeCode, directionCod
     });
 };
 
+/**
+ * Routine to fetch departures for a given stop. If stop belongs to different routes,
+ * departures for all of them are captured and saved.
+ * @param stopCode
+ * @param cb
+ */
 RTTService511.prototype.getDepartures = function (stopCode, cb) {
     var self = this;
     var method = 'GetNextDeparturesByStopCode.aspx';
-    var url = self.createUrl(method);
+    var url = self._createUrl(method);
     url = url + '&stopCode=' + stopCode;
     console.log(url);
     var departureList = {};
@@ -192,7 +221,6 @@ RTTService511.prototype.getDepartures = function (stopCode, cb) {
                         cb(localDeparture, routeCode);
                     }
                 }
-
             } catch (ex) {
                 console.log(ex);
                 cb(null);

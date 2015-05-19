@@ -1,7 +1,8 @@
 var express = require('express');
 var Model = require('../models/Model');
 var router = express.Router();
-var RTTService = require('../controllers/RTTService511');
+var Errors = require('../controllers/common/errors');
+var Constants = require('../controllers/common/constants');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -30,6 +31,7 @@ router.get('/:agencyName/routes', function (req, res, next) {
     var agencyName = req.params.agencyName;
     var agencyObj = Model.getAgency(agencyName);
     var result = [];
+    var err;
     if (agencyObj) {
         var routeArray = agencyObj.getAllRouteCodes();
         routeArray.forEach(function(item) {
@@ -51,10 +53,10 @@ router.get('/:agencyName/routes', function (req, res, next) {
         });
     } else {
         result = {
-                err: "No such agency name exists"
+                err: Errors.ERR_INVALID_AGENCY_NAME
         };
     }
-    
+
     res.contentType('application/json');
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.json(result);
@@ -64,7 +66,7 @@ router.get('/:agencyName/:routeCode/:directionCode/stops', function (req, res, n
     var agencyName = req.params.agencyName;
     var routeCode = req.params.routeCode;
     var directionCode = req.params.directionCode;
-    var result = [];
+    var result;
     var agencyObj = Model.getAgency(agencyName);
 
     if (agencyObj) {
@@ -73,6 +75,7 @@ router.get('/:agencyName/:routeCode/:directionCode/stops', function (req, res, n
             var dirObj = routeObj.getDirection(directionCode);
             if (dirObj) {
                 var stopCodeArray = dirObj.getAllStops() || [];
+                result = [];
                 stopCodeArray.forEach(function (item) {
                     var stopObj = dirObj.getStop(item);
                     result.push({
@@ -82,14 +85,18 @@ router.get('/:agencyName/:routeCode/:directionCode/stops', function (req, res, n
                 });
             } else {
                 result = {
-                        err: "No such direction code exists"
+                        err: Errors.ERR_INVALID_DIRECTION_CODE
                 };
             }
         } else {
             result = {
-                    err: "No such route code exists"
+                    err: Errors.ERR_INVALID_ROUTE_CODE
             };
         }
+    } else {
+        result = {
+                err: Errors.ERR_INVALID_AGENCY_NAME
+        };
     }
     res.contentType('application/json');
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -105,7 +112,7 @@ router.get('/:agencyName/:routeCode/:directionCode/:stopCode/departures', functi
     var agencyObj = Model.getAgency(agencyName);
     res.contentType('application/json');
     res.setHeader("Access-Control-Allow-Origin", "*");
-    var result = {};
+
     if (agencyObj) {
         var routeObj = agencyObj.getRoute(routeCode);
         if (routeObj) {
@@ -114,42 +121,39 @@ router.get('/:agencyName/:routeCode/:directionCode/:stopCode/departures', functi
                 var stopObj = dirObj.getStop(stopCode);
                 if (stopObj) {
                     var lastUpdated = stopObj.lastUpdated;
-                    if ((currentTime - lastUpdated) > (30 * 1000)) { // If more than 30 sec
-                        var service = new RTTService();
+                    if ((currentTime - lastUpdated) > Constants.DEPARTURE_REFRESH_INTERVAL) { // If more than 30 sec
+                        var service = req.service;
                         service.getDepartures(stopCode, function (departList, currentRouteCode) {
                             if (currentRouteCode === routeCode) {
-                                result = stopObj.departureList;
+                                result = departList;
                                 res.json(result);
                             }
                         });
+                        return; // wait for the callback
                     } else {
                         result = stopObj.departureList;
-                        res.json(result);
                     }
                 } else {
                     result = {
-                            err: "No such stop code exists"
+                            err: Errors.ERR_INVALID_STOP_CODE
                     };
-                    res.json(result);
                 }
             } else {
                 result = {
-                        err: "No such direction code exists"
+                        err: Errors.ERR_INVALID_DIRECTION_CODE
                 };
-                res.json(result);
             }
         } else {
             result = {
-                    err: "No such route code exists"
+                    err: Errors.ERR_INVALID_ROUTE_CODE
             };
-            res.json(result);
         }
     } else {
         result = {
-                err: "No such agent name exists"
+                err: Errors.ERR_INVALID_AGENCY_NAME
         };
-        res.json(result);
     }
+    res.json(result);
 });
 
 module.exports = router;

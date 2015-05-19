@@ -21,7 +21,7 @@
                     });
                 },
                 error: function () {
-                    console.err('Agencies fetch failed');
+                    console.log('Agencies fetch failed');
                 }
             });
           }
@@ -37,8 +37,6 @@
     
     var RouteCollection = ItemCollection.extend({
         initialize: function (a, b) {
-            console.log(a);
-            console.log(b);
             this.url = '/'  + agencyCode + '/routes';
         },
         model: RouteItem
@@ -68,48 +66,59 @@
             });
         },
         parse: function(response) {
-            console.log(response);
             this.models = response;
         }
     });
     
     var SelectView = Backbone.View.extend({
-        initialize: function () {
+        initialize: function (obj) {
             _.bindAll(this, 'render', 'onLocalChangeEvent');
             this.collection.on('sync', this.render);
+            this.title = obj.title;
         },
         events: {
             'change': 'onLocalChangeEvent'
         },
         render: function () {
-            //console.log($('#listTemplate').html());
+            var titleDivTemplate = '<div>' + this.title + '</div>';
             var modelList = this.collection.models;
             var template = _.template(selectTemplate, {
                 itemList: modelList
             });
 
-            this.$el.html(template);
+            this.$el.html(titleDivTemplate + template);
             return this;
         },
         onLocalChangeEvent: function (e) {
             this.trigger('itemselected', e.target.value);
-        }
+        },
+        title: 'Default Title'
     });
     
     var ListView = Backbone.View.extend({
-        initialize: function () {
+        initialize: function (obj) {
             _.bindAll(this, 'render');
             this.collection.on('sync', this.render);
+            this.defaultMsg = obj.defaultMsg;
+            this.title = obj.title;
         },
         render: function () {
+            var titleDivTemplate = '<div>' + this.title + '</div>';
             var modelList = this.collection.models;
-            var template = _.template(listTemplate, {
-                itemList: modelList
-            });
+            if (modelList.length > 0) {
+                var template = _.template(listTemplate, {
+                    itemList: modelList
+                });
 
-            this.$el.html(template);
+                this.$el.html(titleDivTemplate + template);
+            } else {
+                this.$el.html(titleDivTemplate + '<p>'+ this.defaultMsg + '</p');
+            }
+            
             return this;
-        }
+        },
+        defaultMsg: 'Nothing to show',
+        title: 'Default Title'
     });
     
     var newRouteCollection;
@@ -124,7 +133,9 @@
         stopCode = value;
         var newDepartureCollection = new DepartureCollection();
         var newDeparturesView = new ListView({
-            collection: newDepartureCollection
+            collection: newDepartureCollection,
+            defaultMsg: 'No departures available at this time',
+            title: 'Departures'
         });
         newDepartureCollection.gather();
         $("#departuresListDiv").empty().append(newDeparturesView.render().$el);
@@ -134,7 +145,8 @@
         directionCode = value;
         var newStopCollection = new StopCollection();
         var newStopView = new SelectView({
-            collection: newStopCollection
+            collection: newStopCollection,
+            title: 'Select Stop'
         });
         newStopView.on('itemselected', onStopSelect);
         newStopCollection.gather();
@@ -147,7 +159,8 @@
         var directionArray = routeModel.get('directionArray');
         directionCollection = new ItemCollection(directionArray, {refId: value });
         var directionView = new SelectView({
-            collection: directionCollection
+            collection: directionCollection,
+            title: 'Select Direction'
         });
         directionView.on('itemselected', onDirectionSelect);
         $("#directionListDiv").empty().append(directionView.render().$el);
@@ -159,7 +172,8 @@
         agencyCode = value;
         newRouteCollection = new RouteCollection([],{refId: value});
         var newRouteView = new SelectView({
-            collection: newRouteCollection
+            collection: newRouteCollection,
+            title: 'Select Route'
         });
         newRouteView.on('itemselected', onRouteSelect);
         newRouteCollection.gather();
@@ -171,7 +185,8 @@
 
     agencyCollection = new AgencyCollection();
     var newListView = new SelectView({
-        collection: agencyCollection
+        collection: agencyCollection,
+        title: 'Select Agency'
     });
     newListView.on('itemselected', onAgencySelect);
     agencyCollection.gather();

@@ -23,16 +23,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var Controller = require('./controllers/controller');
-var Model = require('./models/Model');
+//Above code except the use of routes is express project generated.
+var Constants = require('./controllers/common/constants');
+var ServiceFactory = require('./controllers/services/ServiceFactory');
+var service = ServiceFactory.getServiceByName(Constants.SERVICE_511); // This app uses 511 for now.
+service.fetchAll();
 
 app.use(function (req, res, next) {
-    req.model = Model;
+    req.service = service;
     next();
 });
 
+// All routes entry
 app.use('/', agency);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -64,10 +67,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
-var RTTService = require('./controllers/RTTService511');
-var service = new RTTService(); // TODO Introduce a factory
-service.fetchAll();
 
 module.exports = app;
