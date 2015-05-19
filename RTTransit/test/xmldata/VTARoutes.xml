@@ -1,0 +1,865 @@
+
+<RTT>
+<AgencyList>
+<Agency Name="VTA" HasDirection="True" Mode="Bus">
+<RouteList>
+<Route Name="10 Local (Airport)" Code="10">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="Metro Airport Light Rail Sta via SJ Airport">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="Santa Clara Transit Ctr and Caltrain Sta via SJ Airport">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="101 Express" Code="101">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Camden Ave and Hwy 85">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Palo Alto - Hanson Way and Page Mill Rd">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="102 Express" Code="102">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Palo Alto - Hanson Way and Page Mill Rd">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="South San Jose - Santa Teresa Station">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="103 Express" Code="103">
+<RouteDirectionList>
+<RouteDirection Code="West" Name="Eastridge Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="East" Name="Palo Alto - Hanson Way and Page Mill Rd">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="104 Express" Code="104">
+<RouteDirectionList>
+<RouteDirection Code="West" Name="Palo Alto - Deer Creek Rd">
+</RouteDirection>
+
+<RouteDirection Code="East" Name="Penitencia Creek Transit Center">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="12 Local (Regular)" Code="12">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="Eastridge Transit Center via Flea Mkt">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="San Jose Civic Center via Flea Mkt">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="120 Express" Code="120">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Fremont BART Station">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Lockheed Martin Transit Ctr - Moffett Park/Shoreline Bl">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="121 Express" Code="121">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Gilroy Transit Center and Caltrain Station">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Lockheed Martin Transit Ctr - Moffett Park">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="122 Express" Code="122">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Lockheed Martin Transit Ctr - Moffett Park">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="South San Jose - Santa Teresa Station">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="13 Community Bus" Code="13">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Almaden Expwy and McKean Rd">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Ohlone-Chynoweth Light Rail Station">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="14 Community Bus" Code="14">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Gilroy Transit Center and Caltrain Station">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Saint Louise Hospital">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="140 Express" Code="140">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Fremont BART Station">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Mission College Bl and Montague Expwy">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="16 Community Bus" Code="16">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Burnett Ave">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Morgan Hill Civic Center">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="168 Express" Code="168">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Gilroy Transit Center and Caltrain Station">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="San Jose Diridon Transit Ctr and Caltrain Station">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="17 Community Bus" Code="17">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Gilroy Transit Center and Caltrain Station">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Murray Ave and Tomkins Ct">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="18 Community Bus" Code="18">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Gavilan College">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Gilroy Transit Center and Caltrain Station">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="180 Express" Code="180">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Fremont BART Station">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Great Mall/Main Transit Ctr / Aborn Rd and White Rd">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="181 Express" Code="181">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Fremont BART Station via Great Mall-Main TC">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="San Jose Diridon Transit Ctr and Caltrain Station">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="182 Express" Code="182">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="I.B.M. - Bailey Ave">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Palo Alto - Page Mill Rd and El Camino Real">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="19 Community Bus" Code="19">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Gilroy Transit Center and Caltrain Station">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Wren Ave and Mantelli Dr">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="200 Regular" Code="200">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="200 Mountain View">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="201 Community Bus (DASH)" Code="201">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="Downtown San Jose - 4th St and San Fernando St">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="San Jose Diridon Transit Ctr and Caltrain Station">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="22 Core (Regular)" Code="22">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="Eastridge Transit Ctr via El Camino Real">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="Palo Alto Transit Ctr and Caltrain Sta via El Camino Real">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="23 Core (Regular)" Code="23">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="Alum Rock Transit Ctr via Stevens Creek Bl">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="De Anza College via Stevens Creek Bl">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="25 Core (Regular)" Code="25">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="Alum Rock Transit Ctr via Valley Medical Ctr">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="De Anza College via Valley Medical Ctr">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="26 Core (Regular)" Code="26">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="Eastridge Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="Sunnyvale - Lockheed Martin Transit Ctr">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="27 Local (Regular)" Code="27">
+<RouteDirectionList>
+<RouteDirection Code="West" Name="Good Samaritan Hospaital">
+</RouteDirection>
+
+<RouteDirection Code="East" Name="Kaiser San Jose">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="304 Limited" Code="304">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="South San Jose - Santa Teresa Station">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Sunnyvale Transit Center via Arques Ave">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="31 Local (Regular)" Code="31">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Eastridge Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Evergreen Valley College">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="32 Community Bus" Code="32">
+<RouteDirectionList>
+<RouteDirection Code="West" Name="San Antonio Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="East" Name="Santa Clara Transit Ctr and Caltrain Station">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="321 Limited" Code="321">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="Great Mall-Main Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="Lockheed Martin Transit Ctr - Moffett Park">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="323 Core (Limited)" Code="323">
+<RouteDirectionList>
+<RouteDirection Code="West" Name="De Anza College">
+</RouteDirection>
+
+<RouteDirection Code="East" Name="Downtown San Jose - Bassett St Terminal">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="328 Limited" Code="328">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Almaden Expwy and Via Valiente">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Lockheed Martin Transit Ctr - Moffett Park">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="330 Limited" Code="330">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Adler Dr and Tasman Dr">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Almaden Expwy and Via Valiente">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="34 Community Bus" Code="34">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="Downtown Mountain View Transit Ctr">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="San Antonio Transit Center">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="35 Local (Regular)" Code="35">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Downtown Mountain View Transit Ctr">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Stanford Shopping Center">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="37 Community Bus" Code="37">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="Capitol Light Rail Station">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="West Valley College">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="39 Community Bus" Code="39">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Eastridge Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="The Villages">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="40 Local (Regular)" Code="40">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Foothill College via Downtown Los Altos">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="La Avenida Ave and Shoreline Bl">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="42 Community Bus" Code="42">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Evergreen Valley College">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Kaiser San Jose">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="45 Community Bus" Code="45">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Alum Rock Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Penitencia Creek Transit Center">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="46 Local (Regular)" Code="46">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Great Mall-Main Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Milpitas High School">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="47 Local (Regular)" Code="47">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Great Mall-Main Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="McCarthy Ranch">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="48 Community Bus" Code="48">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Los Gatos Civic Ctr via Winchester Bl">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Winchester Transit Ctr via Winchester Bl">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="49 Community Bus" Code="49">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Los Gatos Civic Ctr via Los Gatos Bl">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Winchester Transit Ctr via Los Gatos Bl">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="51 Local (Regular)" Code="51">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="De Anza College">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Moffett Field - Ames Research Ctr">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="52 Local (Regular)" Code="52">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Downtown Mountain View Transit Ctr">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Foothill College">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="522 Core (Rapid)" Code="522">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="Eastridge Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="Palo Alto Transit Ctr and Caltrain Station">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="53 Local (Regular)" Code="53">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Sunnyvale Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="West Valley College">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="54 Local (Regular)" Code="54">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="De Anza College">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Sunnyvale - Lockheed Martin Transit Ctr">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="55 Core (Regular)" Code="55">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="De Anza College">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Great America">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="57 Local (Regular)" Code="57">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Great America via Quito Rd">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="West Valley College">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="58 Local (Regular)" Code="58">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Alviso / Alviso via Fruitvale Ave">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="West Valley College / De La Cruz Bl and Aldo Ave">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="60 Core (Regular)" Code="60">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Great America">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Winchester Transit Center">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="61 Core (Regular)" Code="61">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Good Samaritan Hospital">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Sierra Rd and Piedmont Rd via Bascom Ave">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="62 Core (Regular)" Code="62">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Good Samaritan Hospaital">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Sierra Rd and Piedmont Rd via Union Ave">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="63 Local (Regular)" Code="63">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Almaden Expwy and Camden Ave">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="San Jose State University">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="64 Core (Regular)" Code="64">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Almaden Light Rail Station">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="McKee Rd and White Rd via Downtown San Jose">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="65 Community Bus" Code="65">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="13th St and Hedding St">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Kooser Rd and Blossom Hill Rd">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="66 Core (Regular)" Code="66">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Kaiser San Jose">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Milpitas / Dixon Rd via Downtown San Jose">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="68 Core (Regular)" Code="68">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Gilroy Transit Center and Caltrain Station">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="San Jose Diridon Transit Ctr and Caltrain Station">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="70 Core (Regular)" Code="70">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Capitol Light Rail Station">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Great Mall-Main Transit Center">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="71 Core (Regular)" Code="71">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Eastridge Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Great Mall-Main Transit Center via White Rd">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="72 Core (Regular)" Code="72">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Downtown San Jose">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Senter Rd and Monterey Hwy">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="73 Core (Regular)" Code="73">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Downtown San Jose">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Snell Rd and Capitol Expwy">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="77 Core (Regular)" Code="77">
+<RouteDirectionList>
+<RouteDirection Code="South" Name="Eastridge Transit Center">
+</RouteDirection>
+
+<RouteDirection Code="North" Name="Great Mall-Main Transit Center via King Rd">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="81 Local (Regular)" Code="81">
+<RouteDirectionList>
+<RouteDirection Code="East" Name="San Jose State Univ and Santa Clara Transit Ctr">
+</RouteDirection>
+
+<RouteDirection Code="West" Name="Vallco Mall">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="82 Local (Regular)" Code="82">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Downtown San Jose">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Westgate Center">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="88 Community Bus" Code="88">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="Middlefield Rd and Colorado Ave">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Palo Alto Veteran&#39;s Hospital">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="89 Local (Regular)" Code="89">
+<RouteDirectionList>
+<RouteDirection Code="North" Name="California Ave Caltrain Station">
+</RouteDirection>
+
+<RouteDirection Code="South" Name="Palo Alto Veteran&#39;s Hospital">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="900" Code="900">
+<RouteDirectionList>
+<RouteDirection Code="Inbound" Name="Inbound to Ohlone/Chynoweth to Almaden">
+</RouteDirection>
+
+<RouteDirection Code="Outbound" Name="Outbound to Almaden to Ohlone/Chynoweth">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="901" Code="901">
+<RouteDirectionList>
+<RouteDirection Code="Inbound" Name="Inbound to Alum Rock to Santa Teresa">
+</RouteDirection>
+
+<RouteDirection Code="Outbound" Name="Outbound to Santa Teresa to Alum Rock">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="901X" Code="901X">
+<RouteDirectionList>
+<RouteDirection Code="Inbound" Name="Inbound to Alum Rock to Santa Teresa">
+</RouteDirection>
+
+<RouteDirection Code="Outbound" Name="Outbound to Santa Teresa to Alum Rock">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="902" Code="902">
+<RouteDirectionList>
+<RouteDirection Code="Inbound" Name="Inbound to Mountain View to Winchester">
+</RouteDirection>
+
+<RouteDirection Code="Outbound" Name="Outbound to Winchester to Mountain View">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="911" Code="911">
+<RouteDirectionList>
+<RouteDirection Code="Inbound" Name="Inbound to Santa Teresa to Levi&#39;s Stadium">
+</RouteDirection>
+
+<RouteDirection Code="Outbound" Name="Outbound to Levi&#39;s Stadium to Santa Teresa">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="912" Code="912">
+<RouteDirectionList>
+<RouteDirection Code="Inbound" Name="Inbound to Mountain View to Levi&#39;s Stadium">
+</RouteDirection>
+
+<RouteDirection Code="Outbound" Name="Outbound to Levi&#39;s Stadium to Mountain View">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="913" Code="913">
+<RouteDirectionList>
+<RouteDirection Code="Inbound" Name="Inbound to Alum Rock to Levi&#39;s Stadium">
+</RouteDirection>
+
+<RouteDirection Code="Outbound" Name="Outbound to Levi&#39;s Stadium to Alum Rock">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="914" Code="914">
+<RouteDirectionList>
+<RouteDirection Code="Inbound" Name="Inbound to Winchester to Levi&#39;s Stadium">
+</RouteDirection>
+
+<RouteDirection Code="Outbound" Name="Outbound to Levi&#39;s Stadium to Winchester">
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+</RouteList>
+</Agency>
+
+</AgencyList>
+</RTT>

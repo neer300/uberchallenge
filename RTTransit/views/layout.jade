@@ -6,13 +6,6 @@ html
     script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js')
     script(src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore.js')
     script(src='http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js')
-    <script type="text/template" id="rate_select_template">
-    <select id="rate-selector">
-    <% _(rates).each(function(rate) { %>
-    <option value="<%= rate.duration %>"><%= rate.duration %></option>
-    <% }); %>
-    </select>
-    </script>
 
   body
     block content

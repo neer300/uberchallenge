@@ -93,7 +93,7 @@ function Agency (name, hasDirection, mode) {
     var self = this;
     self.name = name;
     self.hasDirection = hasDirection;
-    self.mode = null;
+    self.mode = mode;
     self.routes = {};
 }
 
@@ -167,11 +167,16 @@ module.exports.updateDeparturesForStop = function (agencyName, routeCode, direct
             if (dirObj) {
                 var stopObj = dirObj.getStop(stopCode);
                 if (stopObj) {
+                    var newList = [];
                     for (var index = 0; index < departureList.length; index++) {
-                        departureList[index] = parseInt(departureList[index]);
+                        newList.push(parseInt(departureList[index]));
                     }
-                    departureList.sort();
-                    stopObj.update(departureList);
+
+                    newList.sort(function (second, first) {
+                        return second > first;
+                    });
+                    
+                    stopObj.update(newList);
                 }
             }
         }

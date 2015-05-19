@@ -1,0 +1,46 @@
+
+<RTT>
+<AgencyList>
+<Agency Name="SF-MUNI" HasDirection="True" Mode="Bus">
+<RouteList>
+<Route Name="1-California" Code="1">
+<RouteDirectionList>
+<RouteDirection Code="Outbound" Name="Outbound to The Richmond District">
+<StopList>
+<Stop name="California St and 16th Ave" StopCode="13833">
+<DepartureTimeList>
+<DepartureTime>2</DepartureTime>
+<DepartureTime>14</DepartureTime>
+<DepartureTime>19</DepartureTime>
+</DepartureTimeList>
+</Stop>
+
+</StopList>
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+<Route Name="1AX-California A Express" Code="1AX">
+<RouteDirectionList>
+<RouteDirection Code="Outbound" Name="Outbound to The Richmond District">
+<StopList>
+<Stop name="California St and 16th Ave" StopCode="13833">
+<DepartureTimeList>
+<DepartureTime>56</DepartureTime>
+<DepartureTime>80</DepartureTime>
+<DepartureTime>100</DepartureTime>
+</DepartureTimeList>
+</Stop>
+
+</StopList>
+</RouteDirection>
+
+</RouteDirectionList>
+</Route>
+
+</RouteList>
+</Agency>
+
+</AgencyList>
+</RTT>

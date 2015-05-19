@@ -1,0 +1,132 @@
+
+<RTT>
+<AgencyList>
+<Agency Name="BART" HasDirection="False" Mode="Rail">
+<RouteList>
+<Route Name="Daly City" Code="747">
+<StopList>
+<Stop name="16th St. Mission (SF)" StopCode="10">
+</Stop>
+
+<Stop name="Civic Center (SF)" StopCode="12">
+</Stop>
+
+<Stop name="Powell St. (SF)" StopCode="14">
+</Stop>
+
+<Stop name="Montgomery St. (SF)" StopCode="16">
+</Stop>
+
+<Stop name="Embarcadero (SF)" StopCode="18">
+</Stop>
+
+<Stop name="West Oakland" StopCode="20">
+</Stop>
+
+<Stop name="Fremont" StopCode="21">
+</Stop>
+
+<Stop name="Union City" StopCode="23">
+</Stop>
+
+<Stop name="South Hayward" StopCode="25">
+</Stop>
+
+<Stop name="Hayward" StopCode="27">
+</Stop>
+
+<Stop name="Bayfair (San Leandro)" StopCode="29">
+</Stop>
+
+<Stop name="San Leandro" StopCode="31">
+</Stop>
+
+<Stop name="Coliseum/Oakland Airport" StopCode="33">
+</Stop>
+
+<Stop name="Fruitvale (Oakland)" StopCode="35">
+</Stop>
+
+<Stop name="Lake Merritt (Oakland)" StopCode="37">
+</Stop>
+
+<Stop name="Richmond" StopCode="40">
+</Stop>
+
+<Stop name="El Cerrito Del Norte" StopCode="42">
+</Stop>
+
+<Stop name="El Cerrito Plaza" StopCode="44">
+</Stop>
+
+<Stop name="North Berkeley" StopCode="46">
+</Stop>
+
+<Stop name="Downtown Berkeley" StopCode="48">
+</Stop>
+
+<Stop name="Ashby (Berkeley)" StopCode="50">
+</Stop>
+
+<Stop name="Concord" StopCode="52">
+</Stop>
+
+<Stop name="Pleasant Hill/Contra Costa Centre" StopCode="54">
+</Stop>
+
+<Stop name="Walnut Creek" StopCode="56">
+</Stop>
+
+<Stop name="Lafayette" StopCode="58">
+</Stop>
+
+<Stop name="Orinda" StopCode="60">
+</Stop>
+
+<Stop name="Rockridge (Oakland)" StopCode="62">
+</Stop>
+
+<Stop name="MacArthur (Oakland)" StopCode="64">
+</Stop>
+
+<Stop name="19th St. Oakland" StopCode="66">
+</Stop>
+
+<Stop name="12th St. Oakland City Center" StopCode="68">
+</Stop>
+
+<Stop name="North Concord/Martinez" StopCode="70">
+</Stop>
+
+<Stop name="Castro Valley" StopCode="73">
+</Stop>
+
+<Stop name="Dublin/Pleasanton" StopCode="75">
+</Stop>
+
+<Stop name="Pittsburg/Bay Point" StopCode="78">
+</Stop>
+
+<Stop name="West Dublin/Pleasanton" StopCode="87">
+</Stop>
+
+<Stop name="Daly City" StopCode="92">
+</Stop>
+
+<Stop name="Balboa Park (SF)" StopCode="94">
+</Stop>
+
+<Stop name="Glen Park (SF)" StopCode="96">
+</Stop>
+
+<Stop name="24th St. Mission (SF)" StopCode="98">
+</Stop>
+
+</StopList>
+</Route>
+
+</RouteList>
+</Agency>
+
+</AgencyList>
+</RTT>

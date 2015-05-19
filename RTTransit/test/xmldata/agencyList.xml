@@ -1,0 +1,10 @@
+<RTT>
+<AgencyList>
+<Agency Name="AC Transit" HasDirection="True" Mode="Bus">
+</Agency>
+
+<Agency Name="BART" HasDirection="False" Mode="Rail">
+</Agency>
+
+</AgencyList>
+</RTT>

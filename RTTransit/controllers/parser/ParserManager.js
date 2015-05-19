@@ -1,10 +1,13 @@
-/**
- * New node file
- */
+'use strict'
 
 var DOMParser = require('xmldom').DOMParser;
 var parser = new DOMParser();
 
+/**
+ * Cleans the xml string off white spaces, new lines and commented sections
+ * @param xmlString
+ * @returns
+ */
 function cleanXml (xmlString) {
     var xml = xmlString;
     if (xml) {
@@ -18,6 +21,11 @@ function cleanXml (xmlString) {
     return xml;
 }
 
+/**
+ * Parses the input string and returns DOM representation.
+ * @param {string} xmlString The XML string to parse
+ * @return {DOM} The DOM tree representing the xml document
+ */
 exports.parseXml = function (xmlString) {
     var xml = cleanXml(xmlString);
     return parser.parseFromString(xml, 'application/xml');
