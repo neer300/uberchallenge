@@ -22,4 +22,14 @@
     * The conscious choice of not backing up with a DB was about avoiding the hassles of consistency. However, the current web app will need special routine which periodically checks for any changes to list of agencies and routing information.
   * Things I could do differently
     * I had to invest a lot of time learning BackboneJS. I think simple plain JS would have helped me deliver quickly as I wanted to focus on backend.
-    * I had some creative ideas for the backend - 
+    * I had some creative ideas for the backend which I couldn't finish because of lack of time.
+      * Public Transit Planner
+        Public transit commuter often have to use multiple transport media to reach their destination. Often, in their plan they encounter a lot of wait times as the next train/bus doesn't arrive immediately. The idea I had was for following use cases.
+          1. User doesn't mind biking or walking.\n
+              As the backend knows the routes and the estimated departure times, it can take user's itinerary as input and recommend new routes such that at any point, user is not wasting time waiting for the next bus.
+          2. User wants to explore places\n
+              Using Facebook profile and identifying likes, this service can possibly give ideas about new books stores/ coffee shops/ gift shops so that user can spend quality time while waiting for the next bus.
+          3. User who is in no hurry, doesn't mind missing the next departing transit\n
+              Similar to number 2. serving can recommend more places to explore.
+          4. Find buddies\n
+              Find out if there are other people user knows going on same route. May be share an Uber instead!
