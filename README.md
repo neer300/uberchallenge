@@ -1,5 +1,5 @@
 #Description
-  As part of coding challenge from Uber, this web app uses 511 Real Time Transit service tpo fetch departure times for public transport stops.
+  As part of coding challenge from Uber, this web app uses 511 Real Time Transit service to fetch departure times for public transport stops.
 
 ##Focus
   This solution focusses more on backend, with a very minimal UI.
