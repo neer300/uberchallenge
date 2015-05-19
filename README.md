@@ -36,8 +36,8 @@
           4. Find buddies
               * Find out if there are other people user knows going on same route. May be share an Uber instead!
 
-##Profile
+###Profile
   * Resume - https://drive.google.com/open?id=0B2dfSnd_zyvPb2F6c3dUY0NqaWs&authuser=1
   * LinkedIn - https://www.linkedin.com/in/neerajsjoshi
 
-##Hosted here - http://secure-depths-2215.herokuapp.com/
+###Hosted here - http://secure-depths-2215.herokuapp.com/
